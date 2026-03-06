@@ -1,0 +1,12 @@
+2. When running on HPC for 10 buildings, it takes
+real	1m58.752s
+user	1m58.265s
+sys	0m0.119s
+
+The data set contains 4571 buildings.
+Therefore we estimate it will take 
+2min * 457 buildings = 914 minutes
+
+As we wish to add a buffer to this, 
+we estimate it will take 
+16 hours = 960 minutes = 57600 seconds
