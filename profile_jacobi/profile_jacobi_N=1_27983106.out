@@ -1,0 +1,89 @@
+building_id, mean_temp, std_temp, pct_above_18, pct_below_15
+10000, 14.01233878811275, 6.367431059312565, 30.941014791508444, 55.542295034537624
+Wrote profile results to simulate.py.lprof
+Inspect results with:
+python -m line_profiler -rmt "simulate.py.lprof"
+Timer unit: 1e-06 s
+
+Total time: 7.79428 s
+File: simulate.py
+Function: jacobi at line 14
+
+Line #      Hits         Time  Per Hit   % Time  Line Contents
+==============================================================
+    14                                           @profile
+    15                                           def jacobi(u, interior_mask, max_iter, atol=1e-6):
+    16         1       1160.9   1160.9      0.0      u = np.copy(u)
+    17                                           
+    18      3602       2968.4      0.8      0.0      for i in range(max_iter):
+    19                                                   # Compute average of left, right, up and down neighbors, see eq. (1)
+    20      3602    5173760.5   1436.4     66.4          u_new = 0.25 * (u[1:-1, :-2] + u[1:-1, 2:] + u[:-2, 1:-1] + u[2:, 1:-1])
+    21      3602     679098.3    188.5      8.7          u_new_interior = u_new[interior_mask]
+    22      3602    1262031.6    350.4     16.2          delta = np.abs(u[1:-1, 1:-1][interior_mask] - u_new_interior).max()
+    23      3602     665771.2    184.8      8.5          u[1:-1, 1:-1][interior_mask] = u_new_interior
+    24                                           
+    25      3602       9483.6      2.6      0.1          if delta < atol:
+    26         1          0.8      0.8      0.0              break
+    27         1          0.2      0.2      0.0      return u
+
+  7.79 seconds - simulate.py:14 - jacobi
+
+------------------------------------------------------------
+Sender: LSF System <lsfadmin@hpc.dtu.dk>
+Subject: Job 27983106: <ProfileJacobi> in cluster <dcc> Done
+
+Job <ProfileJacobi> was submitted from host <n-62-27-23> by user <s213309> in cluster <dcc> at Fri Mar  6 11:25:55 2026
+Job was executed on host(s) <n-62-11-63>, in queue <hpc>, as user <s213309> in cluster <dcc> at Fri Mar  6 11:25:55 2026
+</zhome/c5/3/165492> was used as the home directory.
+</zhome/c5/3/165492/Documents/02613_PyHPC> was used as the working directory.
+Started at Fri Mar  6 11:25:55 2026
+Terminated at Fri Mar  6 11:26:05 2026
+Results reported at Fri Mar  6 11:26:05 2026
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+#!/bin/bash
+#BSUB -J ProfileJacobi                          # Job name
+#BSUB -q hpc                                # Queue name
+#BSUB -W 10                                 # Wall-clock time
+#BSUB -R "rusage[mem=2GB]"                  # Resources
+#BSUB -o profile_jacobi_N=1_%J.out                 # Output file (stdout)
+#BSUB -e profile_jacobi_N=1_%J.err                 # Output file (stderr)
+#BSUB -R "select[model==XeonGold6226R]"     # Select CPU model
+#BSUB -n 1                                  # Select number of cores
+#BSUB -R "span[hosts=1]"                    # Specify that the number of cores must be on the same host
+
+# InitializePythonenvironment
+source /dtu/projects/02613_2025/conda/conda_init.sh
+conda activate 02613
+
+# Run Python script
+kernprof -l simulate.py
+python -m line_profiler -rmt simulate.py.lprof
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time :                                   9.18 sec.
+    Max Memory :                                 48 MB
+    Average Memory :                             48.00 MB
+    Total Requested Memory :                     2048.00 MB
+    Delta Memory :                               2000.00 MB
+    Max Swap :                                   -
+    Max Processes :                              4
+    Max Threads :                                5
+    Run time :                                   30 sec.
+    Turnaround time :                            10 sec.
+
+The output (if any) is above this job summary.
+
+
+
+PS:
+
+Read file <profile_jacobi_N=1_27983106.err> for stderr output of this job.
+
