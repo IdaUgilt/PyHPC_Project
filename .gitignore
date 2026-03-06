@@ -1,0 +1,10 @@
+# data
+small_data/
+
+# python
+__pycache__/
+*.pyc
+.env
+
+# misc
+*.log
