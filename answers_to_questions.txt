@@ -10,3 +10,9 @@ Therefore we estimate it will take
 As we wish to add a buffer to this, 
 we estimate it will take 
 16 hours = 960 minutes = 57600 seconds
+
+
+5. Static scheduling, same amount of floorplans:
+As the week 5 exercise 2, chunked parallel.
+We divide into n_proc, which is the number of processes we make, 
+and then we give an equal amount of work to each of these processes.
