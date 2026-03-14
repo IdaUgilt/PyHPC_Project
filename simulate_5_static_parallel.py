@@ -2,7 +2,7 @@ from os.path import join
 import sys
 import numpy as np
 import multiprocessing
-
+import matplotlib.pyplot as plt
 
 def load_data(load_dir, bid):
     SIZE = 512
@@ -72,7 +72,7 @@ if __name__ == '__main__':
     ABS_TOL = 1e-4
 
     # Divide into chunks
-    n_proc = 10 # using 10 processes
+    n_proc = 2 # using 10 processes
     n_proc = np.min([n_proc,N]) #ensures that we do not run 10 processes if we e.g. only have 5 buildings
     all_u0_chunk = np.array_split(all_u0, n_proc)
     all_interior_mask_chunk = np.array_split(all_interior_mask, n_proc)
@@ -82,9 +82,8 @@ if __name__ == '__main__':
     pool = multiprocessing.Pool(n_proc) # creates n_proc worker processes
     results_async = [pool.apply_async(jacobi_multiple, (all_u0_chunk[i], all_interior_mask_chunk[i], MAX_ITER, ABS_TOL))
                                     for i in range(n_proc)]
-    for r in results_async:
-        print(r.get())
-    all_u = np.vstack(r.get() for r in results_async)
+    
+    all_u = np.vstack([r.get() for r in results_async])
 
     # Print summary statistics in CSV format
     stat_keys = ['mean_temp', 'std_temp', 'pct_above_18', 'pct_below_15']
@@ -92,3 +91,8 @@ if __name__ == '__main__':
     for bid, u, interior_mask in zip(building_ids, all_u, all_interior_mask):
         stats = summary_stats(u, interior_mask)
         print(f"{bid},", ", ".join(str(stats[k]) for k in stat_keys))
+        plt.imshow(u, interpolation='none')
+        plt.colorbar()
+        plt.savefig(f"interim_result_images/{bid}_temperature.png")
+        plt.close()
+        plt.imshow(u, interpolation='none')
