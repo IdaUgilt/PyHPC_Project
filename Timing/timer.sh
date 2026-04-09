@@ -15,14 +15,14 @@ conda activate 02613
 
 # Run Python script
 echo "10"
-Time simulate.py 10
+time python3 simulate.py 10
 
 echo "13"
-Time simulate.py 13
+time simulate.py 13
 
 echo "16"
-Time simulate.py 16
+time simulate.py 16
 
 
 echo "20"
-Time simulate.py 20
+time simulate.py 20
