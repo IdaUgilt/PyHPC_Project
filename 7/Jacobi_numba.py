@@ -76,10 +76,10 @@ if __name__ == '__main__':
 
         # Print summary statistics in CSV format
     stat_keys = ['mean_temp', 'std_temp', 'pct_above_18', 'pct_below_15']
-    print('building_id, ' + ', '.join(stat_keys),file=sys.sterr)  # CSV header
+    print('building_id, ' + ', '.join(stat_keys),file=sys.stderr)  # CSV header
     for bid, u, interior_mask in zip(building_ids, all_u, all_interior_mask):
         stats = summary_stats(u, interior_mask)
-        print(f"{bid},", ", ".join(str(stats[k]) for k in stat_keys),file=sys.sterr)
+        print(f"{bid},", ", ".join(str(stats[k]) for k in stat_keys),file=sys.stderr)
         
 
     time = perf_counter()-start

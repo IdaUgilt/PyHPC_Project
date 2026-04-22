@@ -3,7 +3,7 @@
 #BSUB -q c02613                                # Queue name
 #BSUB -gpu "num=1:mode=exclusive_process"
 #BSUB -W 10                                 # Wall-clock time
-#BSUB -R "rusage[mem=2GB]"                  # Resources
+#BSUB -R "rusage[mem=1GB]"                  # Resources
 #BSUB -o Cupy_timer_%J.out                 # Output file (stdout)
 #BSUB -e Cupy_timer_%J.err                 # Output file (stderr)
 #BSUB -n 4                                  # Select number of cores

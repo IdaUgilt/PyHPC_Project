@@ -12,6 +12,6 @@
 source /dtu/projects/02613_2025/conda/conda_init.sh
 conda activate 02613_2026
 
-echo "time" > course_02613/Mini_projeckt/2/timings_static.txt
+echo "time" > /zhome/a5/0/187476/course_02613/Mini_projeckt/2/timings_static.txt
 
 python3 simulate.py 20
