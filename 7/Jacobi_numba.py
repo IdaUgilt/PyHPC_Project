@@ -2,6 +2,7 @@ import numpy as np
 from numba import jit
 from os.path import join
 import sys
+from time import perf_counter
 
 
 def load_data(load_dir, bid):
@@ -45,7 +46,7 @@ def summary_stats(u, interior_mask):
 
 
 if __name__ == '__main__':
-    # Load data
+    start = perf_counter()
     LOAD_DIR = '/dtu/projects/02613_2025/data/modified_swiss_dwellings/'
     with open(join(LOAD_DIR, 'building_ids.txt'), 'r') as f:
         building_ids = f.read().splitlines()
@@ -73,9 +74,13 @@ if __name__ == '__main__':
         u = jacobi(u0, interior_mask, MAX_ITER, ABS_TOL)
         all_u[i] = u
 
-    # Print summary statistics in CSV format
+        # Print summary statistics in CSV format
     stat_keys = ['mean_temp', 'std_temp', 'pct_above_18', 'pct_below_15']
-    print('building_id, ' + ', '.join(stat_keys))  # CSV header
+    print('building_id, ' + ', '.join(stat_keys),file=sys.sterr)  # CSV header
     for bid, u, interior_mask in zip(building_ids, all_u, all_interior_mask):
         stats = summary_stats(u, interior_mask)
-        print(f"{bid},", ", ".join(str(stats[k]) for k in stat_keys))
+        print(f"{bid},", ", ".join(str(stats[k]) for k in stat_keys),file=sys.sterr)
+        
+
+    time = perf_counter()-start
+    print(f"{time:.4f}")

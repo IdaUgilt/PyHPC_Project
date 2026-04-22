@@ -13,26 +13,7 @@
 source /dtu/projects/02613_2025/conda/conda_init.sh
 conda activate 02613_2026
 
-echo "test"
-time python3 Jacobi_numba.py 1
+echo "time" > course_02613/Mini_projeckt/7/timings_static.txt
 
-# Run Python script
-echo "10"
-for i in 1 2 3; do
-    time python3 Jacobi_numba.py 10
-done
+python3 Jacobi_numba.py 20
 
-echo "13"
-for i in 1 2 3; do
-    time python3 Jacobi_numba.py 13
-done
-
-echo "16"
-for i in 1 2 3; do
-    time python3 Jacobi_numba.py 16
-done
-
-echo "20"
-for i in 1 2 3; do
-    time python3 Jacobi_numba.py 20
-done
