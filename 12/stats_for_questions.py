@@ -2,15 +2,15 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 
-path = "12/dummy_results.csv" # ændre efter behov
-df = pd.read_csv(path, sep =', ')
+path = "12\output.csv" # ændre efter behov
+df = pd.read_csv(path, sep =',')
 
 # a) What is the distribution of the mean temperatures? Show your results as histograms.
 plt.hist(df["mean_temp"], bins=15,edgecolor="darkblue")
 plt.xlabel("Mean temperature [degrees celcius]")
 plt.ylabel("Frequency")
-plt.show()
 plt.savefig("12/12a_histogram.png")
+plt.show()
 
 # b) What is the average mean temperature of the buildings?
 avr_mean_temp = df.mean(numeric_only=True)["mean_temp"]
