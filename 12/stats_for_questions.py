@@ -7,7 +7,7 @@ df = pd.read_csv(path, sep =',')
 
 # a) What is the distribution of the mean temperatures? Show your results as histograms.
 plt.hist(df["mean_temp"], bins=15,edgecolor="darkblue")
-plt.xlabel("Mean temperature [degrees celcius]")
+plt.xlabel("Mean temperature [$\degree$C]")
 plt.ylabel("Frequency")
 plt.savefig("12/12a_histogram.png")
 plt.show()
