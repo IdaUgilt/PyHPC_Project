@@ -13,7 +13,7 @@
 source /dtu/projects/02613_2025/conda/conda_init.sh
 conda activate 02613_2026
 
-echo "time" > course_02613/Mini_projeckt/7/timings_static.txt
+python3 Jacobi_numba.py 1 
 
-python3 Jacobi_numba.py 20
+python3 Jacobi_numba.py 20 
 

@@ -13,6 +13,10 @@
 source /dtu/projects/02613_2025/conda/conda_init.sh
 conda activate 02613_2026
 
-echo "time" > course_02613/Mini_projeckt/9/timings_static.txt
-
 python3 simulate_cupy.py 20
+
+
+
+136/100
+
+34/20

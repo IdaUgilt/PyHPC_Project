@@ -13,5 +13,4 @@
 source /dtu/projects/02613_2025/conda/conda_init.sh
 conda activate 02613_2026
 
-
-$ nsys profile -o double_prof python simulate_cupy.py 20
+nsys profile -o double_prof python simulate_cupy.py 20
