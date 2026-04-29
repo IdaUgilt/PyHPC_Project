@@ -15,8 +15,3 @@ conda activate 02613_2026
 
 python3 simulate_cupy.py 20
 
-
-
-136/100
-
-34/20
