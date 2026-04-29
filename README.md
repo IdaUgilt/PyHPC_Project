@@ -49,5 +49,3 @@ Each folder contains:
 
 ## Authors
 Course project for **02613 Python and High Performance Computing**
-
-```
